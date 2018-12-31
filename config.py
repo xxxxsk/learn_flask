@@ -18,6 +18,8 @@ class Config:
     MAIL_USERNAME='1306237818@qq.com'
     MAIL_PASSWORD='ktvivyntvmfnbafb'
     FLASKY_ADMIN='1306237818@qq.com'
+    FLASKY_POSTS_PER_PAGE = 20
+    FLASKY_FOLLOWERS_PER_PAGE = 50
 
     @staticmethod
     def init_app(app):
