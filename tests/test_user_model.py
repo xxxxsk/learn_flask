@@ -33,9 +33,9 @@ class UserModelTestCase(unittest.TestCase):
         self.assertFalse(u.verify_password('dog'))
 
     def test_password_salts_are_random(self):
-        u=User(password='cat')
-        u2= User(password='cat')
-        self.assertTrue(u.password_hash!=u2.password_hash)
+        u = User(password='cat')
+        u2 = User(password='cat')
+        self.assertTrue(u.password_hash != u2.password_hash)
 
     def test_valid_confirmation_token(self):
         u = User(password='cat')
@@ -165,7 +165,7 @@ class UserModelTestCase(unittest.TestCase):
             gravatar_pg = u.gravatar(rating='pg')
             gravatar_retro = u.gravatar(default='retro')
         self.assertTrue('https://secure.gravatar.com/avatar/' +
-                        'd4c74594d841139328695756648b6bd6' in gravatar)
+                        'd4c74594d841139328695756648b6bd6'in gravatar)
         self.assertTrue('s=256' in gravatar_256)
         self.assertTrue('r=pg' in gravatar_pg)
         self.assertTrue('d=retro' in gravatar_retro)
@@ -206,3 +206,14 @@ class UserModelTestCase(unittest.TestCase):
         db.session.delete(u2)
         db.session.commit()
         self.assertTrue(Follow.query.count() == 1)
+
+    def test_to_json(self):
+        u = User(email='john@example.com', password='cat')
+        db.session.add(u)
+        db.session.commit()
+        with self.app.test_request_context('/'):
+            json_user = u.to_json()
+        expected_keys = ['url', 'username', 'member_since', 'last_seen',
+                         'posts_url', 'followed_posts_url', 'post_count']
+        self.assertEqual(sorted(json_user.keys()), sorted(expected_keys))
+        self.assertEqual('/api/v1/users/' + str(u.id), json_user['url'])
