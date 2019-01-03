@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_bootstrap import Bootstrap
-from flask_mail import Mail, Message
+from flask_mail import Mail
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -14,7 +14,6 @@ db = SQLAlchemy()
 pagedown = PageDown()
 
 login_manager = LoginManager()
-#login_manager.session_protection= 'Strong'
 login_manager.login_view = 'auth.login'
 
 
