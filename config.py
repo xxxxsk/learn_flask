@@ -14,6 +14,7 @@ class Config:
     FLASKY_MAIL_SENDER = 'Flasky Admin <1306237818@qq.com>'
     #FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_RECORD_QUERIES = True
     #MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     #MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_USERNAME='1306237818@qq.com'
@@ -22,6 +23,7 @@ class Config:
     FLASKY_POSTS_PER_PAGE = 20
     FLASKY_FOLLOWERS_PER_PAGE = 50
     FLASKY_COMMENTS_PER_PAGE = 30
+    FLASKY_SLOW_DB_QUERY_TIME = 0.5
 
 
     @staticmethod
