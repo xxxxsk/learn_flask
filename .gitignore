@@ -1,3 +1,5 @@
 #virtual environment
-venv2
+venv
+.DS_Store
+*.DS_Store
 __pycache__
