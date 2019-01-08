@@ -118,12 +118,9 @@ class User(UserMixin, db.Model):
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:
-            if self.email == 'shuaikangxue@foxmail.com':
-                print('+++++++++++++ADMIN+++++++++++++')
-            #if self.email == current_app.config['FLASKY_ADMIN']:
+            if self.email == current_app.config['FLASKY_ADMIN']:
                 self.role = Role.query.filter_by(name='Administrator').first()
-                #self.role = Role.query.filter_by(permissions=16).first()
-            else:
+            if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
         if self.email is not None and self.avatar_hash is None:
             self.avatar_hash = self.gravatar_hash()
@@ -365,6 +362,6 @@ class Comment(db.Model):
         if body is None or body == '':
             raise ValidationError('comment does not have a body')
         return Comment(body=body)
-        
+
 
 db.event.listen(Comment.body, 'set', Comment.on_changed_body)
