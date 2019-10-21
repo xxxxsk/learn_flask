@@ -2,7 +2,7 @@
 certifi==2017.7.27.1
 chardet==3.0.4
 Faker==0.7.18
-httpie==0.9.9
+httpie==1.0.3
 idna==2.5
 requests==2.18.2
 selenium==3.4.3
